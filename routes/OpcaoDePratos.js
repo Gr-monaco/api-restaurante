@@ -52,6 +52,15 @@ router.post('/', async (req, res) => {
       }
 })
 
+router.delete('/:id', getOpcaoDePrato, async (req, res) =>{
+    try{
+        await res.opcao.remove();
+        res.json({message: 'Opção deletada'});
+    } catch(err){
+        res.status(500).json({message:err.message});
+    }
+})
+
 async function getOpcaoDePrato(req, res, next) {
     let opcao
     try {
