@@ -17,7 +17,7 @@ router.post('/', async(req, res)=> {
     }
 })
 
-router.get("/login", getUsuarioByEmail, (req, res)=>{
+router.post("/login", getUsuarioByEmail, (req, res)=>{
 
     if(res.usuario[0].password!= req.body.password){
         res.status(401).json({message:`Wrong password`});
