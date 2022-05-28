@@ -9,6 +9,14 @@ const subop = new mongoose.Schema({
     quantidade : {
         type: Number,
         required: true
+    },
+    valor_unitario : {
+        type: Number,
+        required: true
+    },
+    valor_total_do_prato : {
+        type: Number,
+        required: true
     }
 });
 
@@ -16,6 +24,10 @@ const pedidoSchema = new mongoose.Schema({
     opcoes: [subop],
     cliente: {
         type:String,
+        required:true
+    },
+    valorTotal: {
+        type: Number,
         required:true
     }
 })
