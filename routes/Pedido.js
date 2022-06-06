@@ -12,28 +12,24 @@ router.post('/', async (req,res)=> {
         const pratos = Object.keys(req.body);
         const qnt = Object.values(req.body);
         //Tira o email dos arrays
-        pratos.pop();
-        qnt.pop();
+        pratos.pop()
+        qnt.pop()
 
         const opcoesArray = [];
         let prato;
-        let precoTotalDoPrato
+        let precoTotalDoPrato;
         for (let index = 0; index < pratos.length; index++) {
             prato = await OpcaoDePrato.findById(pratos[index]);
-            console.log(prato);
             precoTotalDoPrato = prato.preco * qnt[index];
             opcoesArray.push({nomePrato: prato.nome, quantidade: qnt[index], valor_unitario:prato.preco, valor_total_do_prato: precoTotalDoPrato})            
         }
 
-        console.log(opcoesArray);
-        let valorIncial = 0;
         let valorTotalPedido = opcoesArray.reduce((accumulador, elementoAtual) => {return accumulador + elementoAtual.valor_total_do_prato}, 0);
         const pedido = new Pedido({
             opcoes: opcoesArray,
             cliente: req.body.email,
             valorTotal: valorTotalPedido
-        })
-        console.log(pedido);
+        });
         const novoPedido = await pedido.save();
     } catch(err){
         res.status(400).json({message: err.message});

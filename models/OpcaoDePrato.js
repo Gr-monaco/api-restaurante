@@ -9,6 +9,10 @@ const opcaoDePratoSchema = new mongoose.Schema({
     preco:{
         type:Number,
         required:true
+    },
+    descricao:{
+        type:String,
+        required:true
     }
 });
 
